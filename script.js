@@ -1,13 +1,35 @@
-body{margin:0;font-family:Arial;background:#f5f5f5}
-.header{background:orange;padding:15px;text-align:center;color:#fff}
-.item-table{width:100%;border-collapse:collapse;background:#fff}
-.item-table th{background:#ffcc80;padding:10px;border:1px solid #ddd}
-.item-table td{padding:10px;text-align:center;border:1px solid #ddd}
-.item-table img{width:50px}
-button{background:#28a745;color:#fff;border:none;padding:6px 12px;border-radius:5px;cursor:pointer}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6)}
-.modal-content{background:#fff;width:320px;margin:80px auto;padding:15px;border-radius:8px;text-align:center}
-.msg{font-size:14px}
-.qr-img{width:220px;margin:10px 0}
-.proof-btn{background:#28a745;width:100%;margin-top:8px}
-.close-btn{background:#dc3545;width:100%;margin-top:8px}
+let selectedItem = "";
+let selectedPrice = "";
+
+function buyItem(item, price){
+  selectedItem = item;
+  selectedPrice = price;
+  document.getElementById("qrImage").src = "images/qr.png";
+  document.getElementById("qrModal").style.display = "block";
+}
+
+function sendProof(){
+  const msg =
+    "payment proof\n\n" +
+    "item: " + selectedItem +
+    "\npayment done via qr.\n" +
+    "screenshot attached.";
+
+  window.open(
+    "https://wa.me/919142053259?text=" +
+    encodeURIComponent(msg),
+    "_blank"
+  );
+}
+
+function closeQR(){
+  document.getElementById("qrModal").style.display = "none";
+}
+
+function downloadQR(){
+  const img = document.getElementById("qrImage");
+  const a = document.createElement("a");
+  a.href = img.src;
+  a.download = "payment-qr.png";
+  a.click();
+}
