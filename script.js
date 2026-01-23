@@ -5,22 +5,21 @@ function buyItem(item){
   document.getElementById("qrModal").style.display = "block";
 }
 
+function closeQR(){
+  document.getElementById("qrModal").style.display = "none";
+}
+
 function sendProof(){
   const msg =
-    "payment proof\n\n" +
-    "item: " + selectedItem +
-    "\npayment done via qr.\n" +
-    "screenshot attached.";
+    "Payment Proof\n\nItem: " +
+    selectedItem +
+    "\nPayment done via QR.";
 
   window.open(
     "https://wa.me/919142053259?text=" +
     encodeURIComponent(msg),
     "_blank"
   );
-}
-
-function closeQR(){
-  document.getElementById("qrModal").style.display = "none";
 }
 
 function downloadQR(){
